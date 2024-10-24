@@ -2,7 +2,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 Future<String?> readToken() async {
   const storage = FlutterSecureStorage();
-  return await storage.read(key: 'auth_token');
+  //return await storage.read(key: 'auth_token');
+  return null;
 }
 
 Future<void> writeToken(String token) async {

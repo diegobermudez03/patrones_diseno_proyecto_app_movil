@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobile_app/core/app_strings.dart';
 import 'package:mobile_app/features/login/presentation/pages/verification_page.dart';
 import 'package:mobile_app/features/login/presentation/state/login_bloc.dart';
 import 'package:mobile_app/features/login/presentation/state/login_states.dart';
+import 'package:mobile_app/features/login/presentation/state/submit_code_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -26,56 +28,66 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-            switch (state) {
-              case LoginFailureState(message: String m):
-                {
-                  emailController.clear();
-                  phoneController.clear();
-                  showDialog(
-                      context: context,
-                      builder: (subContext) {
-                        return AlertDialog(
-                          title: const Text(AppStrings.failedAuthentication),
-                          content: Text(m),
-                        );
-                      });
-                };break;
-                case LoginSuccessState _ :{
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> VerificationPage()));
-                };break;
-            }
-
+          switch (state) {
+            case LoginFailureState(message: String m):
+              {
+                emailController.clear();
+                phoneController.clear();
+                showDialog(
+                    context: context,
+                    builder: (subContext) {
+                      return AlertDialog(
+                        title: const Text(AppStrings.failedAuthentication),
+                        content: Text(m),
+                      );
+                    });
+              }
+              ;
+              break;
+            case LoginSuccessState(number: String num):
+              {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                          create: (context) => GetIt.instance.get<SubmitCodeBloc>(),
+                          child: VerificationPage(
+                            phoneNumber: num,
+                          ),
+                        )));
+              }
+              ;
+              break;
+          }
         },
         child: BlocBuilder<LoginBloc, LoginState>(
           builder: (context, state) {
             final provider = BlocProvider.of<LoginBloc>(context);
-            return switch(state){
+            return switch (state) {
               LoginLoadingState _ => const Center(child: CircularProgressIndicator()),
               LoginState _ => Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Text(
-                    AppStrings.appName,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextField(
-                    onEditingComplete: () => setState(() {}),
-                    controller: emailController,
-                    autofillHints: [AppStrings.emailHint],
-                  ),
-                  TextField(
-                    onEditingComplete: () => setState(() {}),
-                    controller: phoneController,
-                    autofillHints: [AppStrings.emailHint],
-                  ),
-                  TextButton(
-                    onPressed: (emailController.text.isNotEmpty && phoneController.text.isNotEmpty)
-                        ? () => callback(provider, emailController.text, phoneController.text)
-                        : null,
-                    child: const Text(AppStrings.login),
-                  ),
-                ],
-              )
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(
+                      AppStrings.appName,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    TextField(
+                      onEditingComplete: () => setState(() {}),
+                      controller: emailController,
+                      autofillHints: [AppStrings.emailHint],
+                    ),
+                    TextField(
+                      onEditingComplete: () => setState(() {}),
+                      controller: phoneController,
+                      autofillHints: [AppStrings.emailHint],
+                    ),
+                    TextButton(
+                      onPressed: (emailController.text.isNotEmpty && phoneController.text.isNotEmpty)
+                          ? () => callback(provider, emailController.text, phoneController.text)
+                          : null,
+                      child: const Text(AppStrings.login),
+                    ),
+                  ],
+                )
             };
           },
         ),

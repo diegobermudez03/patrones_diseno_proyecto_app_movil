@@ -14,6 +14,8 @@ class LoginLoginState implements LoginState{
 }
 
 class LoginSuccessState implements LoginState{
+  final String number;
+  LoginSuccessState(this.number);
 }
 
 class LoginFailureState implements LoginState{

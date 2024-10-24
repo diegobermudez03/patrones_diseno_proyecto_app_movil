@@ -21,7 +21,7 @@ class LoginBloc extends Cubit<LoginState>{
 
     response.fold(
       (f)=> emit(LoginFailureState(f.message)),
-      (success) => emit(LoginSuccessState()) 
+      (success) => emit(LoginSuccessState(number)) 
     );
   }
 

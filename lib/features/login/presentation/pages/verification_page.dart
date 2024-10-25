@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Import for input formatting
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mobile_app/core/app_strings.dart';
-import 'package:mobile_app/features/current/presentation/pages/current_page.dart';
-import 'package:mobile_app/features/current/presentation/state/current_bloc.dart';
 import 'package:mobile_app/features/login/presentation/state/submit_code_bloc.dart';
 import 'package:mobile_app/features/login/presentation/state/submit_code_states.dart';
+import 'package:mobile_app/shared/homepage/home_page.dart';
 
 class VerificationPage extends StatelessWidget {
   final controller = TextEditingController();
@@ -40,10 +38,9 @@ class VerificationPage extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => BlocProvider(
-                          create: (context) => GetIt.instance.get<CurrentBloc>(),
-                          child: CurrentPage(),
-                        )));
+                    builder: (context) =>  HomePage(),
+                )
+            );
           }
         },
         child: BlocBuilder<SubmitCodeBloc, SubmitCodeState>(

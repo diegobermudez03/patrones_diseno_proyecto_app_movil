@@ -3,13 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app/dep_injection.dart';
 import 'package:mobile_app/features/login/domain/use_cases/submit_code_use_case.dart';
 import 'package:mobile_app/features/login/presentation/state/submit_code_states.dart';
-import 'package:mobile_app/shared/storage_services.dart';
+import 'package:mobile_app/shared/storage_service/storage_service.dart';
 
 class SubmitCodeBloc extends Cubit<SubmitCodeState>{
   final SubmitCodeUseCase _submitCodeUseCase;
+  final StorageService _storageService;
 
   SubmitCodeBloc(
-    this._submitCodeUseCase
+    this._submitCodeUseCase,
+    this._storageService
   ): super(SubmitCodeInitialState());
 
   void submit(String number, String code)async{
@@ -20,7 +22,7 @@ class SubmitCodeBloc extends Cubit<SubmitCodeState>{
     response.fold(
       (f)=> emit(SubmitCodeFailure(f.message)),
       (token)async{
-        await writeToken(token);
+        await _storageService.writeToken(token);
         await initAllDependencies(token);
         emit(SubmitCodeSuccess());
       }

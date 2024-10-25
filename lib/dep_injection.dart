@@ -1,5 +1,6 @@
 
 import 'package:get_it/get_it.dart';
+import 'package:mobile_app/features/current/domain/use_cases/get_ocassions_use_case.dart';
 import 'package:mobile_app/features/current/presentation/state/current_bloc.dart';
 import 'package:mobile_app/features/login/domain/use_cases/login_use_case.dart';
 import 'package:mobile_app/features/login/domain/use_cases/submit_code_use_case.dart';
@@ -30,6 +31,11 @@ Future<void> initAllDependencies(String token) async{
 
   //  CURRENT PAGE
 
+  //use cases
+  inst.registerLazySingleton<GetOcassionsUseCase>(()=> GetOcassionsUseCase());
+
   //bloc
-  inst.registerFactory<CurrentBloc>(()=>CurrentBloc());
+  inst.registerFactory<CurrentBloc>(()=>CurrentBloc(
+    inst.get<GetOcassionsUseCase>()
+  ));
 }

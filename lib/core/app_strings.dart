@@ -11,4 +11,11 @@ class AppStrings{
   static const digit4Code = "Codigo de 4 digitos";
   static const inProgress = "En progreso";
   static const events = "Eventos";
+  static const event = "Evento";
+  static const booking = "Reserva";
+  static const house = "Casa";
+  static const apartment = "Apartamento";
+  static const enter = "Entrar";
+  static const exit = "Salir";
+  static const apiError = "Hubo un error con la api";
 }

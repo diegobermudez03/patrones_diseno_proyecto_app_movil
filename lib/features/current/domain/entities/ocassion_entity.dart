@@ -5,7 +5,7 @@ class OcassionEntity{
   final int ocassionId;
   final EventEntity? event;
   final BookingEntity? booking;
-  final bool isInside;
+  bool isInside;
 
   OcassionEntity(this.ocassionId, this.event, this.booking, this.isInside);
 }

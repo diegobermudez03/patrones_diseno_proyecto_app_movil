@@ -19,4 +19,6 @@ class AppStrings{
   static const exit = "Salir";
   static const apiError = "Hubo un error con la api";
   static const waitingSession = "Una vez el administrador apruebe su sesion podra ingresar";
+  static const error = "Error";
+  static const errorWithAction = "An error ocured with the action, unable to do it";
 }

@@ -5,10 +5,14 @@ import 'package:mobile_app/features/current/domain/entities/ocassion_entity.dart
 class OcassionTile extends StatelessWidget{
 
   final OcassionEntity ocassion;
+  final void Function(int) callback;
+  final int? loadingOcassionId;
 
   OcassionTile({
     super.key,
     required this.ocassion,
+    required this.callback,
+    required this.loadingOcassionId,
   });
 
   @override
@@ -22,20 +26,23 @@ class OcassionTile extends StatelessWidget{
       String house = ocassion.booking!.isHouse ? AppStrings.house : AppStrings.apartment;
       content = '${house} : ${ocassion.booking!.address}';
     }
-    final Color buttonColor = ocassion.isInside ? Colors.green : Colors.red;
+    final Color buttonColor = ocassion.isInside ? Colors.red : Colors.green;
     final String action = ocassion.isInside ? AppStrings.exit : AppStrings.enter;
     return Container(
       child: Column(
         children: [
           Text(type),
           Text(content),
-          TextButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(buttonColor)
-            ),
-            onPressed: (){}, 
-            child: Text(action)
-          ),
+          (loadingOcassionId != ocassion.ocassionId ? 
+            TextButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(buttonColor)
+              ),
+              onPressed: ()=>callback(ocassion.ocassionId), 
+              child: Text(action)
+            ) :
+            const CircularProgressIndicator()
+          )
         ],
       ),
     );

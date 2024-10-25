@@ -24,7 +24,7 @@ class GetOcassionsUseCase implements UseCase<List<OcassionEntity>, void>{
         true
       ),
       OcassionEntity(
-        1, 
+        2, 
         null,
         BookingEntity(
           1, 

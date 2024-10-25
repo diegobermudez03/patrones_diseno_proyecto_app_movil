@@ -13,3 +13,16 @@ class CurrentRetrieveSuccess implements CurrentState{
 
   CurrentRetrieveSuccess(this.ocassions);
 }
+
+class CurrentLoadingAction implements CurrentState{
+  final List<OcassionEntity> ocassions;
+  final int loadingOcassionId;
+
+  CurrentLoadingAction(this.ocassions, this.loadingOcassionId);
+}
+
+class CurrentActionFailure implements CurrentState{
+  final List<OcassionEntity> ocassions;
+
+  CurrentActionFailure(this.ocassions);
+}

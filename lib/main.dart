@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_app/core/color_theme.dart';
 import 'package:mobile_app/dep_injection.dart';
-import 'package:mobile_app/features/current/presentation/pages/current_page.dart';
-import 'package:mobile_app/features/current/presentation/state/current_bloc.dart';
 import 'package:mobile_app/features/login/domain/check_session_use_case.dart';
 import 'package:mobile_app/features/login/presentation/pages/login_page.dart';
 import 'package:mobile_app/features/login/presentation/pages/waiting_page.dart';

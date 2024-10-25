@@ -18,4 +18,5 @@ class AppStrings{
   static const enter = "Entrar";
   static const exit = "Salir";
   static const apiError = "Hubo un error con la api";
+  static const waitingSession = "Una vez el administrador apruebe su sesion podra ingresar";
 }

@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_app/core/color_theme.dart';
 import 'package:mobile_app/dep_injection.dart';
+import 'package:mobile_app/features/current/presentation/pages/current_page.dart';
+import 'package:mobile_app/features/current/presentation/state/current_bloc.dart';
+import 'package:mobile_app/features/login/domain/check_session_use_case.dart';
 import 'package:mobile_app/features/login/presentation/pages/login_page.dart';
+import 'package:mobile_app/features/login/presentation/pages/waiting_page.dart';
 import 'package:mobile_app/features/login/presentation/state/login_bloc.dart';
 import 'package:mobile_app/shared/homepage/home_page.dart';
 import 'package:mobile_app/shared/storage_service/storage_service.dart';
@@ -16,20 +20,32 @@ void main() async {
   final String? token = await storageService.readToken();
 
   late bool loginPage;
+  bool waitingPage = true;
   if (token == null) {
     await initLoginDependencies(storageService);
     loginPage = true;
-  } else {
+  } 
+  if(token != null) {
     await initAllDependencies(token);
     loginPage = false;
+    final response = await GetIt.instance.get<CheckSessionUseCase>().call(token);
+    response.fold(
+      (f)=> loginPage = true,
+      (s)=> waitingPage = !s, //if token is inactive, it would be false, in which case, waitingPage would be true
+    );
   }
-  runApp(MyApp(loginPage: loginPage));
+  runApp(MyApp(loginPage: loginPage, waitingPage: waitingPage,));
 }
 
 class MyApp extends StatelessWidget {
   final bool loginPage;
+  final bool waitingPage;
 
-  const MyApp({super.key, required this.loginPage});
+  const MyApp({
+    super.key,
+    required this.loginPage,
+    required this.waitingPage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +58,13 @@ class MyApp extends StatelessWidget {
       home: loginPage
           ? BlocProvider(
               create: (context) => GetIt.instance.get<LoginBloc>(),
-              child: LoginPage(),
+              child: const LoginPage(),
             )
           : 
-          HomePage(),
+          (
+            waitingPage ? WaitingPage() : 
+            HomePage()
+          )
     );
   }
 }

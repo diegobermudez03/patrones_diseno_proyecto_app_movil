@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Import for input formatting
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app/core/app_strings.dart';
+import 'package:mobile_app/features/login/presentation/pages/waiting_page.dart';
 import 'package:mobile_app/features/login/presentation/state/submit_code_bloc.dart';
 import 'package:mobile_app/features/login/presentation/state/submit_code_states.dart';
-import 'package:mobile_app/shared/homepage/home_page.dart';
 
 class VerificationPage extends StatelessWidget {
   final controller = TextEditingController();
@@ -38,7 +38,7 @@ class VerificationPage extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>  HomePage(),
+                    builder: (context) =>  WaitingPage(),
                 )
             );
           }

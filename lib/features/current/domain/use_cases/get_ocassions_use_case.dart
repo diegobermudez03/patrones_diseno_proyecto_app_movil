@@ -9,6 +9,7 @@ class GetOcassionsUseCase implements UseCase<List<OcassionEntity>, void>{
 
   @override
   Future<Either<Failure, List<OcassionEntity>>> call(void param) async{
+    await Future.delayed(Duration(seconds: 1));
     return Right([
       OcassionEntity(
         1, 

@@ -23,6 +23,7 @@ class CurrentLoadingAction implements CurrentState{
 
 class CurrentActionFailure implements CurrentState{
   final List<OcassionEntity> ocassions;
+  final String message;
 
-  CurrentActionFailure(this.ocassions);
+  CurrentActionFailure(this.ocassions, this.message);
 }

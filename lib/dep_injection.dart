@@ -14,7 +14,7 @@ import 'package:mobile_app/features/login/presentation/state/submit_code_bloc.da
 import 'package:mobile_app/shared/storage_service/storage_service.dart';
 
 final inst = GetIt.instance;
-const uri = "localhost:3000";
+const uri = "10.0.2.2:3000";
 
 Future<void> initLoginDependencies(StorageService storageService) async {
   //REPOSITORIES

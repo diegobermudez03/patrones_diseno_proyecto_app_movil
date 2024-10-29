@@ -20,9 +20,9 @@ class CurrentPage extends StatelessWidget {
             showDialog(
               context: context, 
               builder: (subContext){
-                return const AlertDialog(
+                return  AlertDialog(
                   title: Text(AppStrings.error),
-                  content: Text(AppStrings.errorWithAction),
+                  content: Text(state.message),
                 );
               }
             );

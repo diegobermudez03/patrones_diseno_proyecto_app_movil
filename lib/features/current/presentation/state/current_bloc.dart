@@ -36,7 +36,7 @@ class CurrentBloc extends Cubit<CurrentState>{
     final response = await _actionOnOcassionUseCase(ocassionId);
 
     response.fold(
-      (f)=> emit(CurrentActionFailure(ocassions)),
+      (f)=> emit(CurrentActionFailure(ocassions, f.message)),
       (s){
         ocassions.where((oc)=>oc.ocassionId == ocassionId).first.isInside = s;  //s is the returned by the api, if its now inside or outside
         emit(CurrentRetrieveSuccess(ocassions));

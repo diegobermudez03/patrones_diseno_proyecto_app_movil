@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_app/core/color_theme.dart';
 import 'package:mobile_app/dep_injection.dart';
-import 'package:mobile_app/features/login/domain/check_session_use_case.dart';
+import 'package:mobile_app/features/login/domain/use_cases/check_session_use_case.dart';
 import 'package:mobile_app/features/login/presentation/pages/login_page.dart';
 import 'package:mobile_app/features/login/presentation/pages/waiting_page.dart';
 import 'package:mobile_app/features/login/presentation/state/login_bloc.dart';
@@ -22,17 +22,22 @@ void main() async {
   if (token == null) {
     await initLoginDependencies(storageService);
     loginPage = true;
-  } 
-  if(token != null) {
+  }
+  if (token != null) {
     await initAllDependencies(token);
     loginPage = false;
-    final response = await GetIt.instance.get<CheckSessionUseCase>().call(token);
+    final response =
+        await GetIt.instance.get<CheckSessionUseCase>().call(token);
     response.fold(
-      (f)=> loginPage = true,
-      (s)=> waitingPage = !s, //if token is inactive, it would be false, in which case, waitingPage would be true
+      (f) => loginPage = true,
+      (s) => waitingPage =
+          !s, //if token is inactive, it would be false, in which case, waitingPage would be true
     );
   }
-  runApp(MyApp(loginPage: loginPage, waitingPage: waitingPage,));
+  runApp(MyApp(
+    loginPage: loginPage,
+    waitingPage: waitingPage,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -48,21 +53,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: MaterialTheme.darkMediumContrastScheme(),
-        useMaterial3: true,
-      ),
-      home: loginPage
-          ? BlocProvider(
-              create: (context) => GetIt.instance.get<LoginBloc>(),
-              child: const LoginPage(),
-            )
-          : 
-          (
-            waitingPage ? WaitingPage() : 
-            HomePage()
-          )
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: MaterialTheme.darkMediumContrastScheme(),
+          useMaterial3: true,
+        ),
+        home: loginPage
+            ? BlocProvider(
+                create: (context) => GetIt.instance.get<LoginBloc>(),
+                child: const LoginPage(),
+              )
+            : (waitingPage ? WaitingPage() : HomePage()));
   }
 }

@@ -19,19 +19,17 @@ void main() async {
 
   late bool loginPage;
   bool waitingPage = true;
+  await initLoginDependencies(storageService);
   if (token == null) {
-    await initLoginDependencies(storageService);
     loginPage = true;
   }
   if (token != null) {
     await initAllDependencies(token);
     loginPage = false;
-    final response =
-        await GetIt.instance.get<CheckSessionUseCase>().call(token);
+    final response = await GetIt.instance.get<CheckSessionUseCase>().call(token);
     response.fold(
       (f) => loginPage = true,
-      (s) => waitingPage =
-          !s, //if token is inactive, it would be false, in which case, waitingPage would be true
+      (s) => waitingPage =!s, //if token is inactive, it would be false, in which case, waitingPage would be true
     );
   }
   runApp(MyApp(

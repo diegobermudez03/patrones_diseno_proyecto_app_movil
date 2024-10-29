@@ -57,7 +57,7 @@ class LoginRepoImpl implements LoginRepo{
      try{
       final url = Uri.http(uri, '/auth/submit');
       final Map<String, dynamic> requestBody = {
-        "phone" : param.value1,
+        "number" : param.value1,
         "code": param.value2,
       };
 

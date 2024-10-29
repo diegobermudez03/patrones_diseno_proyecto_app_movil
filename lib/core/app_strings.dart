@@ -22,4 +22,5 @@ class AppStrings{
   static const error = "Error";
   static const errorWithAction = "An error ocured with the action, unable to do it";
   static const errorWithAPI = "Hubo un error con la api";
+  static const currentOccasions = "Actualmente";
 }

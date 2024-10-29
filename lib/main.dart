@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //getting the storage service here, here we inject the type we want to use
   //and then we passs it to init login dependencies since those are the only ones that need it
-  final StorageService storageService = MockStorageService();
+  final StorageService storageService = MobileSecureStorageService();
   final String? token = await storageService.readToken();
 
   late bool loginPage;
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: MaterialTheme.darkMediumContrastScheme(),
+          colorScheme: MaterialTheme.lightHighContrastScheme(),
           useMaterial3: true,
         ),
         home: loginPage

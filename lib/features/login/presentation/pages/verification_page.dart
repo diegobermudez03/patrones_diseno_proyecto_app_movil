@@ -34,6 +34,7 @@ class VerificationPage extends StatelessWidget {
                 });
           }
           if (state is SubmitCodeSuccess) {
+            print("here trying to change page");
             while (Navigator.of(context).canPop()) Navigator.of(context).pop();
             Navigator.push(
                 context,

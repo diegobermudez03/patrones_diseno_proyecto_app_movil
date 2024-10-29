@@ -23,7 +23,6 @@ class SubmitCodeBloc extends Cubit<SubmitCodeState>{
       (f)=> emit(SubmitCodeFailure(f.message)),
       (token)async{
         await _storageService.writeToken(token);
-        await initAllDependencies(token);
         emit(SubmitCodeSuccess());
       }
     );

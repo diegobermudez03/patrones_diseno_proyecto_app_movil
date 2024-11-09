@@ -142,15 +142,15 @@ class _LoginPageState extends State<LoginPage> {
 
   void callback(LoginBloc provider, String email, String number) async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    late final String phoneModel;
-
+    late final String phoneModel = "model";
+    /*
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       phoneModel = '${androidInfo.brand} ${androidInfo.product} ${androidInfo.model}';
     } else if (Platform.isIOS) {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       phoneModel = 'Apple ${iosInfo.model} ${iosInfo.name}';
-    }
+    }*/
     provider.login(email, number, phoneModel);
   }
 }

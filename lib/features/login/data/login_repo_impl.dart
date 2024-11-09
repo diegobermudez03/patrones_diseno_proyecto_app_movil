@@ -14,7 +14,7 @@ class LoginRepoImpl implements LoginRepo{
   @override
   Future<Either<Failure, bool>> checkSession(String sessionToken) async{
     try{
-      final url = Uri.http(uri, '/sessions/check/$sessionToken');
+      final url = Uri.parse('$uri/sessions/check/$sessionToken');
       final response = await http.get(url);
       if(response.statusCode < 200 || response.statusCode >= 300){
         return Left(APIFailure(response.body));
@@ -29,7 +29,7 @@ class LoginRepoImpl implements LoginRepo{
   @override
   Future<Either<Failure, bool>> login(Tuple3 param) async{
      try{
-      final url = Uri.http(uri, '/auth/login');
+      final url = Uri.parse('$uri/auth/login');
       final Map<String, dynamic> body = {
         "email" : param.value1,
         "number": param.value2,
@@ -55,7 +55,7 @@ class LoginRepoImpl implements LoginRepo{
   @override
   Future<Either<Failure, String>> submitCode(Tuple2 param) async{
      try{
-      final url = Uri.http(uri, '/auth/submit');
+      final url = Uri.parse('$uri/auth/submit');
       final Map<String, dynamic> requestBody = {
         "number" : param.value1,
         "code": param.value2,

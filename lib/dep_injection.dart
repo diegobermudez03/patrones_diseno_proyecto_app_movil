@@ -14,7 +14,9 @@ import 'package:mobile_app/features/login/presentation/state/submit_code_bloc.da
 import 'package:mobile_app/shared/storage_service/storage_service.dart';
 
 final inst = GetIt.instance;
-const uri = "10.0.2.2:3000";
+//const uri = "http://10.0.2.2:3000"; //to use from emulator
+const uri = "http://localhost:3000";
+//const uri = "quickpass.downloadablefox.dev";
 
 Future<void> initLoginDependencies(StorageService storageService) async {
   //REPOSITORIES

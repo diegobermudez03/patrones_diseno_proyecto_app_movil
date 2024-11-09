@@ -18,7 +18,7 @@ class CurrentRepoImpl implements CurrentRepo{
   @override
   Future<Either<Failure, bool>> actionOnOcassion(int ocassionId) async{
     try{
-      final url =  Uri.http(uri,'/actions');
+      final url =  Uri.parse('$uri/actions');
       final headers = {
         'Content-Type': 'application/json',
         'Authorization': token,
@@ -42,9 +42,7 @@ class CurrentRepoImpl implements CurrentRepo{
   @override
   Future<Either<Failure, List<OcassionEntity>>> getOcassions() async{
     try{
-      final url =  Uri.http(uri,'/my_ocassions', {
-        'active' : 'true'
-      });
+      final url =  Uri.parse('$uri/my_ocassions?active=true');
       final headers = {
         'Content-Type': 'application/json',
         'Authorization': token,

@@ -4,10 +4,10 @@ import 'package:mobile_app/shared/entities/event_entity.dart';
 BookingEntity jsonToBookingEntity(Map<String, dynamic> json){
   return BookingEntity(
     json["booking_id"], 
-    true,   //TO CHANGE LATER 
-    "static address CHANGEE", 
+    json["accomodation"]["is_house"],
+    json["accomodation"]["address"], 
     DateTime.parse(json["entry_date"]),
-    DateTime.parse(json["exit_date"]) 
+    DateTime.parse(json["exit_date"]),
   );
 }
 

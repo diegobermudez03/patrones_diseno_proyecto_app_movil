@@ -23,4 +23,11 @@ class AppStrings{
   static const errorWithAction = "An error ocured with the action, unable to do it";
   static const errorWithAPI = "Hubo un error con la api";
   static const currentOccasions = "Actualmente";
+  static const bookings = "Reservaciones";
+  static const confirmed = "confirmed";
+  static const registered = "registered";
+  static const invited = "invited";
+  static const confirmationMadeSuccesfully = "Confirmacion realizada exitosamente";
+  static const errorDoingConfirmation = "No se pudo realizar la confirmacion";
+  static const confirmInvitation = "Confirmar";
 }

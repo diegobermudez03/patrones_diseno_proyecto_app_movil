@@ -7,5 +7,6 @@ OcassionEntity jsonToOcassionEntity(Map<String, dynamic> json){
     json["event"] == null ? null: jsonToEventEntity(json["event"]), 
     json["booking"] == null ? null: jsonToBookingEntity(json["booking"]),
     json["inside"], 
+    json["state"]["state_name"],
   );
 }

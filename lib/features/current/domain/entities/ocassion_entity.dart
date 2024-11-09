@@ -6,6 +6,7 @@ class OcassionEntity{
   final EventEntity? event;
   final BookingEntity? booking;
   bool isInside;
+  String state;
 
-  OcassionEntity(this.ocassionId, this.event, this.booking, this.isInside);
+  OcassionEntity(this.ocassionId, this.event, this.booking, this.isInside, this.state);
 }

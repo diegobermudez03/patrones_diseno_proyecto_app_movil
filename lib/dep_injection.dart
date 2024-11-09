@@ -4,6 +4,7 @@ import 'package:mobile_app/features/current/domain/repositories/current_repo.dar
 import 'package:mobile_app/features/current/domain/use_cases/action_on_ocassion_use_case.dart';
 import 'package:mobile_app/features/current/domain/use_cases/get_ocassions_use_case.dart';
 import 'package:mobile_app/features/current/presentation/state/current_bloc.dart';
+import 'package:mobile_app/features/events/presentation/state/events_bloc.dart';
 import 'package:mobile_app/features/login/data/login_repo_impl.dart';
 import 'package:mobile_app/features/login/domain/repositories/login_repo.dart';
 import 'package:mobile_app/features/login/domain/use_cases/check_session_use_case.dart';
@@ -58,4 +59,6 @@ Future<void> initAllDependencies(String token) async {
   //bloc
   inst.registerFactory<CurrentBloc>(() => CurrentBloc(
       inst.get<GetOcassionsUseCase>(), inst.get<ActionOnOcassionUseCase>()));
+
+  inst.registerFactory<EventsBloc>(() => EventsBloc());
 }

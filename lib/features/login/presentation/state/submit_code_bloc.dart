@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_app/dep_injection.dart';
 import 'package:mobile_app/features/login/domain/use_cases/submit_code_use_case.dart';
 import 'package:mobile_app/features/login/presentation/state/submit_code_states.dart';
 import 'package:mobile_app/shared/storage_service/storage_service.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_app/core/app_strings.dart';
 import 'package:mobile_app/features/current/domain/entities/ocassion_entity.dart';
 import 'package:mobile_app/features/current/domain/use_cases/action_on_ocassion_use_case.dart';
 import 'package:mobile_app/features/current/domain/use_cases/get_ocassions_use_case.dart';
@@ -20,7 +21,7 @@ class CurrentBloc extends Cubit<CurrentState>{
     
     response.fold(
       (f)=>emit(CurrentRetrieveFailure()), 
-      (ocassions) => emit(CurrentRetrieveSuccess(ocassions))
+      (ocassions) => emit(CurrentRetrieveSuccess(ocassions.where((o)=>o.state==AppStrings.confirmed).toList()))
     );
   }
 

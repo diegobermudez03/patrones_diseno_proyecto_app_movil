@@ -7,10 +7,13 @@ import 'package:mobile_app/features/events/presentation/state/events_state.dart'
 
 class EventsBloc extends Cubit<EventsState>{
 
-  final GetEventsUseCase _getEventsUseCase = GetEventsUseCase();
-  final ConfirmInvitationUseCase _confirmInvitationUseCase  = ConfirmInvitationUseCase();
+  final GetEventsUseCase _getEventsUseCase;
+  final ConfirmInvitationUseCase _confirmInvitationUseCase;
   
-  EventsBloc(): super(EventsInitialState());
+  EventsBloc(
+    this._confirmInvitationUseCase,
+    this._getEventsUseCase
+  ): super(EventsInitialState());
 
   void retrieveEvents() async{
     await Future.delayed(Duration.zero);

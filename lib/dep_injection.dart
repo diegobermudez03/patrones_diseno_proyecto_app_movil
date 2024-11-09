@@ -1,9 +1,13 @@
 import 'package:get_it/get_it.dart';
+import 'package:mobile_app/features/bookings/domain/get_bookings_use_case.dart';
+import 'package:mobile_app/features/bookings/presentation/state/bookings_bloc.dart';
 import 'package:mobile_app/features/current/data/current_repo_impl.dart';
 import 'package:mobile_app/features/current/domain/repositories/current_repo.dart';
 import 'package:mobile_app/features/current/domain/use_cases/action_on_ocassion_use_case.dart';
 import 'package:mobile_app/features/current/domain/use_cases/get_ocassions_use_case.dart';
 import 'package:mobile_app/features/current/presentation/state/current_bloc.dart';
+import 'package:mobile_app/features/events/domain/confirm_invitation_use_case.dart';
+import 'package:mobile_app/features/events/domain/get_events_use_case.dart';
 import 'package:mobile_app/features/events/presentation/state/events_bloc.dart';
 import 'package:mobile_app/features/login/data/login_repo_impl.dart';
 import 'package:mobile_app/features/login/domain/repositories/login_repo.dart';
@@ -12,6 +16,8 @@ import 'package:mobile_app/features/login/domain/use_cases/login_use_case.dart';
 import 'package:mobile_app/features/login/domain/use_cases/submit_code_use_case.dart';
 import 'package:mobile_app/features/login/presentation/state/login_bloc.dart';
 import 'package:mobile_app/features/login/presentation/state/submit_code_bloc.dart';
+import 'package:mobile_app/shared/data/shared_repo_impl.dart';
+import 'package:mobile_app/shared/shared_repo.dart';
 import 'package:mobile_app/shared/storage_service/storage_service.dart';
 
 final inst = GetIt.instance;
@@ -56,9 +62,37 @@ Future<void> initAllDependencies(String token) async {
     inst.get<CurrentRepo>()
   ));
 
+  //SHARED REPO
+  inst.registerLazySingleton<SharedRepo>(()=>SharedRepoImpl(uri, token));
+
+  //EVENTS
+  //use cases
+  inst.registerLazySingleton<GetEventsUseCase>(()=>GetEventsUseCase(
+    inst.get<SharedRepo>()
+  ));
+  inst.registerLazySingleton<ConfirmInvitationUseCase>(()=>ConfirmInvitationUseCase(
+    inst.get<SharedRepo>()
+  ));
+
   //bloc
   inst.registerFactory<CurrentBloc>(() => CurrentBloc(
       inst.get<GetOcassionsUseCase>(), inst.get<ActionOnOcassionUseCase>()));
 
-  inst.registerFactory<EventsBloc>(() => EventsBloc());
+  inst.registerFactory<EventsBloc>(() => EventsBloc(
+    inst.get(),
+    inst.get()
+  ));
+
+
+  //bookings
+  //use cases
+  inst.registerLazySingleton<GetBookingsUseCase>(()=>GetBookingsUseCase(
+    inst.get<SharedRepo>()
+  ));
+
+  //bloc
+  inst.registerFactory<BookingsBloc>(() => BookingsBloc(
+      inst.get(),
+      inst.get()
+  ));
 }

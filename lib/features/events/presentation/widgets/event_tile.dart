@@ -21,7 +21,7 @@ class EventTile extends StatelessWidget{
         Text(event.event!.name),
         Text(event.event!.address),
         Text(' ${event.event!.startDate} - ${event.event!.endDate}'),
-        if(event.state == AppStrings.invited) _acceptInvitation(context) else Text(AppStrings.confirmed)
+        if(event.state == AppStrings.registered) _acceptInvitation(context) else Text(AppStrings.confirmed)
       ],
     );
   }

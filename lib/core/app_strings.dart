@@ -30,4 +30,5 @@ class AppStrings{
   static const confirmationMadeSuccesfully = "Confirmacion realizada exitosamente";
   static const errorDoingConfirmation = "No se pudo realizar la confirmacion";
   static const confirmInvitation = "Confirmar";
+  static const errorAuthenticating= "Error autenticando";
 }

@@ -16,18 +16,39 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<BottomNavigationBarItem> items = const [
-    BottomNavigationBarItem(icon: Icon(Icons.notifications_active_outlined), label: AppStrings.inProgress),
-    BottomNavigationBarItem(icon: Icon(Icons.event), label: AppStrings.events),
-    BottomNavigationBarItem(icon: Icon(Icons.home_repair_service_sharp), label: AppStrings.bookings),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.notifications_active_outlined),
+      label: AppStrings.inProgress,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.event),
+      label: AppStrings.events,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home_repair_service_sharp),
+      label: AppStrings.bookings,
+    ),
   ];
 
   int page = 0;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.appName),
+        title: Text(AppStrings.appName, style: TextStyle(color: theme.onPrimaryContainer),),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [theme.primaryContainer, theme.secondaryContainer],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: _buildPage(page),
       bottomNavigationBar: BottomNavigationBar(
@@ -38,16 +59,22 @@ class _HomePageState extends State<HomePage> {
             page = index;
           });
         },
+        selectedItemColor: theme.primary,
+        unselectedItemColor: theme.onSurfaceVariant,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: theme.surface,
+        elevation: 8,
       ),
     );
   }
 
-   Widget _buildPage(int index) {
+  Widget _buildPage(int index) {
     switch (index) {
       case 0:
         return BlocProvider(
           create: (context) => GetIt.instance.get<CurrentBloc>(),
-          child: CurrentPage(),
+          child: const CurrentPage(),
         );
       case 1:
         return BlocProvider(
@@ -63,5 +90,4 @@ class _HomePageState extends State<HomePage> {
         return Container();
     }
   }
-
 }

@@ -22,7 +22,7 @@ class BookingTile extends StatelessWidget{
         Text(booking.booking!.isHouse ? AppStrings.house : AppStrings.apartment),
         Text(booking.booking!.address),
         Text(' ${booking.booking!.entryDate} - ${booking.booking!.exitDate}'),
-        if(booking.state == AppStrings.registered) _acceptInvitation(context) else Text(AppStrings.confirmed)
+        if(booking.state == AppStrings.registeredState) _acceptInvitation(context) else Text(AppStrings.confirmed)
       ],
     );
   }

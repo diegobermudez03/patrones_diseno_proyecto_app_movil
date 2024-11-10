@@ -21,7 +21,7 @@ class CurrentBloc extends Cubit<CurrentState>{
     
     response.fold(
       (f)=>emit(CurrentRetrieveFailure()), 
-      (ocassions) => emit(CurrentRetrieveSuccess(ocassions.where((o)=>o.state==AppStrings.confirmed).toList()))
+      (ocassions) => emit(CurrentRetrieveSuccess(ocassions.where((o)=>o.state==AppStrings.confirmedState).toList()))
     );
   }
 

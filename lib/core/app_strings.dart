@@ -24,11 +24,18 @@ class AppStrings{
   static const errorWithAPI = "Hubo un error con la api";
   static const currentOccasions = "Actualmente";
   static const bookings = "Reservaciones";
-  static const confirmed = "confirmed";
-  static const registered = "registered";
-  static const invited = "invited";
+  static const confirmedState = "confirmed";
+  static const confirmed = "Confirmado";
+  static const registeredState = "registered";
+  static const registered = "Registrado";
+  static const invitedState = "invited";
+  static const invited = "Invitado";
   static const confirmationMadeSuccesfully = "Confirmacion realizada exitosamente";
   static const errorDoingConfirmation = "No se pudo realizar la confirmacion";
   static const confirmInvitation = "Confirmar";
   static const errorAuthenticating= "Error autenticando";
+  static const pleaseWaitWhileYourSessionIsBeingApproved = "Por favor espere mientras su sesion es aprobada por el administrador, esto puede tomar algunos minutos";
+  static const inside = "Adentro";
+  static const noEventsAvailableAtTheMoment = "No hay eventos disponibles en este momento";
+  static const noOcassionsAvailableAtTheMoment = "No hay ocasiones en curso en este momento";
 }

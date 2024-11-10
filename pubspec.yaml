@@ -42,6 +42,7 @@ dependencies:
   dartz: ^0.10.1
   #for http requests 
   http: ^1.2.2
+  intl: ^0.19.0
 
 
   # The following adds the Cupertino Icons font to your application.
